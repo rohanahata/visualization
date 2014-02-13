@@ -1,0 +1,1720 @@
+Sign up Sign in
+Explore
+Features
+Enterprise
+Blog
+
+This repository
+Star 0 Fork 0 PUBLIC ernst96 / D3-sunburst
+ branch: master  D3-sunburst / territories.json 
+Ernst Schmidt ernst96 4 months ago Update territories.json
+1 contributor
+ file  855 lines (854 sloc)  36.25 kb EditRawBlameHistory Delete
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+[
+                {
+                    "key": "1",
+                    "name": "Arab Emirates",
+                    "catalog": 17850,
+                    "percentage": 87.56,
+                    "Not_Live_Product_Count": 1950,
+                    "Not_Live_Status_Percentage": 9.56,
+                    "Dropped_Off_Product_Count": 565,
+                    "Dropped_Off_Status_Percentage": 2.77,
+                    "Ready_Product_Count": 22,
+                    "Ready_Status_Percentage": 0.11
+                },
+                {
+                    "key": "2",
+                    "name": "Argentina",
+                    "catalog": 74387,
+                    "percentage": 87.13,
+                    "Not_Live_Product_Count": 7565,
+                    "Not_Live_Status_Percentage": 8.86,
+                    "Dropped_Off_Product_Count": 3251,
+                    "Dropped_Off_Status_Percentage": 3.81,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "3",
+                    "name": "Australia",
+                    "catalog": 56126,
+                    "percentage": 85.62,
+                    "Not_Live_Product_Count": 5709,
+                    "Not_Live_Status_Percentage": 8.71,
+                    "Dropped_Off_Product_Count": 3508,
+                    "Dropped_Off_Status_Percentage": 5.35,
+                    "Ready_Product_Count": 210,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "4",
+                    "name": "Austria",
+                    "catalog": 64929,
+                    "percentage": 79.3,
+                    "Not_Live_Product_Count": 11203,
+                    "Not_Live_Status_Percentage": 13.68,
+                    "Dropped_Off_Product_Count": 5452,
+                    "Dropped_Off_Status_Percentage": 6.66,
+                    "Ready_Product_Count": 291,
+                    "Ready_Status_Percentage": 0.36
+                },
+                {
+                    "key": "5",
+                    "name": "Belgium",
+                    "catalog": 58340,
+                    "percentage": 81.92,
+                    "Not_Live_Product_Count": 8433,
+                    "Not_Live_Status_Percentage": 11.84,
+                    "Dropped_Off_Product_Count": 4211,
+                    "Dropped_Off_Status_Percentage": 5.91,
+                    "Ready_Product_Count": 228,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "6",
+                    "name": "Bolivia",
+                    "catalog": 74471,
+                    "percentage": 87.26,
+                    "Not_Live_Product_Count": 7463,
+                    "Not_Live_Status_Percentage": 8.74,
+                    "Dropped_Off_Product_Count": 3238,
+                    "Dropped_Off_Status_Percentage": 3.79,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "7",
+                    "name": "Brazil",
+                    "catalog": 74949,
+                    "percentage": 87.5,
+                    "Not_Live_Product_Count": 7455,
+                    "Not_Live_Status_Percentage": 8.7,
+                    "Dropped_Off_Product_Count": 3072,
+                    "Dropped_Off_Status_Percentage": 3.59,
+                    "Ready_Product_Count": 177,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "8",
+                    "name": "Brunei Darussal",
+                    "catalog": 57670,
+                    "percentage": 86.87,
+                    "Not_Live_Product_Count": 6156,
+                    "Not_Live_Status_Percentage": 9.27,
+                    "Dropped_Off_Product_Count": 2357,
+                    "Dropped_Off_Status_Percentage": 3.55,
+                    "Ready_Product_Count": 206,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "9",
+                    "name": "Bulgaria",
+                    "catalog": 59148,
+                    "percentage": 76.13,
+                    "Not_Live_Product_Count": 11112,
+                    "Not_Live_Status_Percentage": 14.3,
+                    "Dropped_Off_Product_Count": 7237,
+                    "Dropped_Off_Status_Percentage": 9.31,
+                    "Ready_Product_Count": 200,
+                    "Ready_Status_Percentage": 0.26
+                },
+                {
+                    "key": "11",
+                    "name": "Cambodia",
+                    "catalog": 59379,
+                    "percentage": 86.84,
+                    "Not_Live_Product_Count": 6337,
+                    "Not_Live_Status_Percentage": 9.27,
+                    "Dropped_Off_Product_Count": 2460,
+                    "Dropped_Off_Status_Percentage": 3.6,
+                    "Ready_Product_Count": 205,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "12",
+                    "name": "Canada",
+                    "catalog": 64425,
+                    "percentage": 78.37,
+                    "Not_Live_Product_Count": 10849,
+                    "Not_Live_Status_Percentage": 13.2,
+                    "Dropped_Off_Product_Count": 6795,
+                    "Dropped_Off_Status_Percentage": 8.27,
+                    "Ready_Product_Count": 139,
+                    "Ready_Status_Percentage": 0.17
+                },
+                {
+                    "key": "13",
+                    "name": "Chile",
+                    "catalog": 73761,
+                    "percentage": 86.83,
+                    "Not_Live_Product_Count": 7670,
+                    "Not_Live_Status_Percentage": 9.03,
+                    "Dropped_Off_Product_Count": 3344,
+                    "Dropped_Off_Status_Percentage": 3.94,
+                    "Ready_Product_Count": 177,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "14",
+                    "name": "Colombia",
+                    "catalog": 73860,
+                    "percentage": 87.32,
+                    "Not_Live_Product_Count": 7421,
+                    "Not_Live_Status_Percentage": 8.77,
+                    "Dropped_Off_Product_Count": 3129,
+                    "Dropped_Off_Status_Percentage": 3.7,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "15",
+                    "name": "Costa Rica",
+                    "catalog": 74746,
+                    "percentage": 87.4,
+                    "Not_Live_Product_Count": 7458,
+                    "Not_Live_Status_Percentage": 8.72,
+                    "Dropped_Off_Product_Count": 3137,
+                    "Dropped_Off_Status_Percentage": 3.67,
+                    "Ready_Product_Count": 177,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "16",
+                    "name": "Cyprus",
+                    "catalog": 55574,
+                    "percentage": 87.43,
+                    "Not_Live_Product_Count": 5293,
+                    "Not_Live_Status_Percentage": 8.33,
+                    "Dropped_Off_Product_Count": 2506,
+                    "Dropped_Off_Status_Percentage": 3.94,
+                    "Ready_Product_Count": 189,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "17",
+                    "name": "Czech Republic",
+                    "catalog": 57839,
+                    "percentage": 86.57,
+                    "Not_Live_Product_Count": 5932,
+                    "Not_Live_Status_Percentage": 8.88,
+                    "Dropped_Off_Product_Count": 2872,
+                    "Dropped_Off_Status_Percentage": 4.3,
+                    "Ready_Product_Count": 168,
+                    "Ready_Status_Percentage": 0.25
+                },
+                {
+                    "key": "18",
+                    "name": "Denmark",
+                    "catalog": 66616,
+                    "percentage": 84.26,
+                    "Not_Live_Product_Count": 8284,
+                    "Not_Live_Status_Percentage": 10.48,
+                    "Dropped_Off_Product_Count": 3933,
+                    "Dropped_Off_Status_Percentage": 4.97,
+                    "Ready_Product_Count": 224,
+                    "Ready_Status_Percentage": 0.28
+                },
+                {
+                    "key": "19",
+                    "name": "Dominican Rep.",
+                    "catalog": 74687,
+                    "percentage": 0,
+                    "Not_Live_Product_Count": 0,
+                    "Not_Live_Status_Percentage": 0,
+                    "Dropped_Off_Product_Count": 3204,
+                    "Dropped_Off_Status_Percentage": 0,
+                    "Ready_Product_Count": 177,
+                    "Ready_Status_Percentage": 0
+                },
+                {
+                    "key": "21",
+                    "name": "Ecuador",
+                    "catalog": 73857,
+                    "percentage": 87.33,
+                    "Not_Live_Product_Count": 7420,
+                    "Not_Live_Status_Percentage": 8.77,
+                    "Dropped_Off_Product_Count": 3121,
+                    "Dropped_Off_Status_Percentage": 3.69,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "22",
+                    "name": "El Salvador",
+                    "catalog": 74804,
+                    "percentage": 87.41,
+                    "Not_Live_Product_Count": 7458,
+                    "Not_Live_Status_Percentage": 8.71,
+                    "Dropped_Off_Product_Count": 3137,
+                    "Dropped_Off_Status_Percentage": 3.67,
+                    "Ready_Product_Count": 178,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "23",
+                    "name": "Estonia",
+                    "catalog": 57044,
+                    "percentage": 86.97,
+                    "Not_Live_Product_Count": 5514,
+                    "Not_Live_Status_Percentage": 8.41,
+                    "Dropped_Off_Product_Count": 2781,
+                    "Dropped_Off_Status_Percentage": 4.24,
+                    "Ready_Product_Count": 254,
+                    "Ready_Status_Percentage": 0.39
+                },
+                {
+                    "key": "24",
+                    "name": "Finland",
+                    "catalog": 66250,
+                    "percentage": 84.04,
+                    "Not_Live_Product_Count": 8294,
+                    "Not_Live_Status_Percentage": 10.52,
+                    "Dropped_Off_Product_Count": 4010,
+                    "Dropped_Off_Status_Percentage": 5.09,
+                    "Ready_Product_Count": 278,
+                    "Ready_Status_Percentage": 0.35
+                },
+                {
+                    "key": "25",
+                    "name": "France",
+                    "catalog": 65418,
+                    "percentage": 81.94,
+                    "Not_Live_Product_Count": 9694,
+                    "Not_Live_Status_Percentage": 12.14,
+                    "Dropped_Off_Product_Count": 4531,
+                    "Dropped_Off_Status_Percentage": 5.68,
+                    "Ready_Product_Count": 192,
+                    "Ready_Status_Percentage": 0.24
+                },
+                {
+                    "key": "26",
+                    "name": "Germany",
+                    "catalog": 63206,
+                    "percentage": 77.41,
+                    "Not_Live_Product_Count": 12010,
+                    "Not_Live_Status_Percentage": 14.71,
+                    "Dropped_Off_Product_Count": 6120,
+                    "Dropped_Off_Status_Percentage": 7.5,
+                    "Ready_Product_Count": 313,
+                    "Ready_Status_Percentage": 0.38
+                },
+                {
+                    "key": "27",
+                    "name": "Great Britain",
+                    "catalog": 59662,
+                    "percentage": 78.75,
+                    "Not_Live_Product_Count": 10419,
+                    "Not_Live_Status_Percentage": 13.75,
+                    "Dropped_Off_Product_Count": 5442,
+                    "Dropped_Off_Status_Percentage": 7.18,
+                    "Ready_Product_Count": 234,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "28",
+                    "name": "Greece",
+                    "catalog": 56816,
+                    "percentage": 82.41,
+                    "Not_Live_Product_Count": 7848,
+                    "Not_Live_Status_Percentage": 11.38,
+                    "Dropped_Off_Product_Count": 4111,
+                    "Dropped_Off_Status_Percentage": 5.96,
+                    "Ready_Product_Count": 169,
+                    "Ready_Status_Percentage": 0.25
+                },
+                {
+                    "key": "29",
+                    "name": "Guatemala",
+                    "catalog": 74792,
+                    "percentage": 87.4,
+                    "Not_Live_Product_Count": 7460,
+                    "Not_Live_Status_Percentage": 8.72,
+                    "Dropped_Off_Product_Count": 3143,
+                    "Dropped_Off_Status_Percentage": 3.67,
+                    "Ready_Product_Count": 178,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "30",
+                    "name": "Honduras",
+                    "catalog": 74794,
+                    "percentage": 87.41,
+                    "Not_Live_Product_Count": 7458,
+                    "Not_Live_Status_Percentage": 8.72,
+                    "Dropped_Off_Product_Count": 3138,
+                    "Dropped_Off_Status_Percentage": 3.67,
+                    "Ready_Product_Count": 178,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "31",
+                    "name": "Hong Kong",
+                    "catalog": 59455,
+                    "percentage": 86.81,
+                    "Not_Live_Product_Count": 6380,
+                    "Not_Live_Status_Percentage": 9.32,
+                    "Dropped_Off_Product_Count": 2441,
+                    "Dropped_Off_Status_Percentage": 3.56,
+                    "Ready_Product_Count": 210,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "32",
+                    "name": "Hungary",
+                    "catalog": 58855,
+                    "percentage": 86.66,
+                    "Not_Live_Product_Count": 6092,
+                    "Not_Live_Status_Percentage": 8.97,
+                    "Dropped_Off_Product_Count": 2798,
+                    "Dropped_Off_Status_Percentage": 4.12,
+                    "Ready_Product_Count": 169,
+                    "Ready_Status_Percentage": 0.25
+                },
+                {
+                    "key": "33",
+                    "name": "India",
+                    "catalog": 60889,
+                    "percentage": 88.81,
+                    "Not_Live_Product_Count": 5949,
+                    "Not_Live_Status_Percentage": 8.68,
+                    "Dropped_Off_Product_Count": 1517,
+                    "Dropped_Off_Status_Percentage": 2.21,
+                    "Ready_Product_Count": 205,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "34",
+                    "name": "Indonesia",
+                    "catalog": 59197,
+                    "percentage": 88.4,
+                    "Not_Live_Product_Count": 6120,
+                    "Not_Live_Status_Percentage": 9.14,
+                    "Dropped_Off_Product_Count": 1437,
+                    "Dropped_Off_Status_Percentage": 2.15,
+                    "Ready_Product_Count": 213,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "35",
+                    "name": "Ireland",
+                    "catalog": 58657,
+                    "percentage": 79.61,
+                    "Not_Live_Product_Count": 9693,
+                    "Not_Live_Status_Percentage": 13.15,
+                    "Dropped_Off_Product_Count": 5085,
+                    "Dropped_Off_Status_Percentage": 6.9,
+                    "Ready_Product_Count": 250,
+                    "Ready_Status_Percentage": 0.34
+                },
+                {
+                    "key": "36",
+                    "name": "Israel",
+                    "catalog": 61859,
+                    "percentage": 91.14,
+                    "Not_Live_Product_Count": 4688,
+                    "Not_Live_Status_Percentage": 6.91,
+                    "Dropped_Off_Product_Count": 1145,
+                    "Dropped_Off_Status_Percentage": 1.69,
+                    "Ready_Product_Count": 177,
+                    "Ready_Status_Percentage": 0.26
+                },
+                {
+                    "key": "37",
+                    "name": "Italy",
+                    "catalog": 57614,
+                    "percentage": 80.67,
+                    "Not_Live_Product_Count": 8909,
+                    "Not_Live_Status_Percentage": 12.47,
+                    "Dropped_Off_Product_Count": 4711,
+                    "Dropped_Off_Status_Percentage": 6.6,
+                    "Ready_Product_Count": 187,
+                    "Ready_Status_Percentage": 0.26
+                },
+                {
+                    "key": "38",
+                    "name": "Japan",
+                    "catalog": 7231,
+                    "percentage": 67.95,
+                    "Not_Live_Product_Count": 1214,
+                    "Not_Live_Status_Percentage": 11.41,
+                    "Dropped_Off_Product_Count": 2178,
+                    "Dropped_Off_Status_Percentage": 20.47,
+                    "Ready_Product_Count": 19,
+                    "Ready_Status_Percentage": 0.18
+                },
+                {
+                    "key": "39",
+                    "name": "Laos",
+                    "catalog": 59378,
+                    "percentage": 86.83,
+                    "Not_Live_Product_Count": 6338,
+                    "Not_Live_Status_Percentage": 9.27,
+                    "Dropped_Off_Product_Count": 2465,
+                    "Dropped_Off_Status_Percentage": 3.6,
+                    "Ready_Product_Count": 205,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "40",
+                    "name": "Latvia",
+                    "catalog": 55104,
+                    "percentage": 86.86,
+                    "Not_Live_Product_Count": 5367,
+                    "Not_Live_Status_Percentage": 8.46,
+                    "Dropped_Off_Product_Count": 2713,
+                    "Dropped_Off_Status_Percentage": 4.28,
+                    "Ready_Product_Count": 254,
+                    "Ready_Status_Percentage": 0.4
+                },
+                {
+                    "key": "41",
+                    "name": "Lithuania",
+                    "catalog": 57059,
+                    "percentage": 87.12,
+                    "Not_Live_Product_Count": 5519,
+                    "Not_Live_Status_Percentage": 8.43,
+                    "Dropped_Off_Product_Count": 2664,
+                    "Dropped_Off_Status_Percentage": 4.07,
+                    "Ready_Product_Count": 254,
+                    "Ready_Status_Percentage": 0.39
+                },
+                {
+                    "key": "42",
+                    "name": "Luxembourg",
+                    "catalog": 59061,
+                    "percentage": 81.19,
+                    "Not_Live_Product_Count": 8909,
+                    "Not_Live_Status_Percentage": 12.25,
+                    "Dropped_Off_Product_Count": 4549,
+                    "Dropped_Off_Status_Percentage": 6.25,
+                    "Ready_Product_Count": 228,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "43",
+                    "name": "Macau",
+                    "catalog": 59084,
+                    "percentage": 86.77,
+                    "Not_Live_Product_Count": 6369,
+                    "Not_Live_Status_Percentage": 9.35,
+                    "Dropped_Off_Product_Count": 2436,
+                    "Dropped_Off_Status_Percentage": 3.58,
+                    "Ready_Product_Count": 207,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "44",
+                    "name": "Malaysia",
+                    "catalog": 57764,
+                    "percentage": 86.85,
+                    "Not_Live_Product_Count": 6169,
+                    "Not_Live_Status_Percentage": 9.28,
+                    "Dropped_Off_Product_Count": 2369,
+                    "Dropped_Off_Status_Percentage": 3.56,
+                    "Ready_Product_Count": 206,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "45",
+                    "name": "Malta",
+                    "catalog": 55893,
+                    "percentage": 87.05,
+                    "Not_Live_Product_Count": 5458,
+                    "Not_Live_Status_Percentage": 8.5,
+                    "Dropped_Off_Product_Count": 2652,
+                    "Dropped_Off_Status_Percentage": 4.13,
+                    "Ready_Product_Count": 206,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "46",
+                    "name": "Mexico",
+                    "catalog": 75646,
+                    "percentage": 84.26,
+                    "Not_Live_Product_Count": 9496,
+                    "Not_Live_Status_Percentage": 10.58,
+                    "Dropped_Off_Product_Count": 4463,
+                    "Dropped_Off_Status_Percentage": 4.97,
+                    "Ready_Product_Count": 175,
+                    "Ready_Status_Percentage": 0.19
+                },
+                {
+                    "key": "47",
+                    "name": "Netherlands",
+                    "catalog": 58221,
+                    "percentage": 81.46,
+                    "Not_Live_Product_Count": 8610,
+                    "Not_Live_Status_Percentage": 12.05,
+                    "Dropped_Off_Product_Count": 4411,
+                    "Dropped_Off_Status_Percentage": 6.17,
+                    "Ready_Product_Count": 229,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "48",
+                    "name": "New Zealand",
+                    "catalog": 56189,
+                    "percentage": 87.5,
+                    "Not_Live_Product_Count": 4769,
+                    "Not_Live_Status_Percentage": 7.43,
+                    "Dropped_Off_Product_Count": 3053,
+                    "Dropped_Off_Status_Percentage": 4.75,
+                    "Ready_Product_Count": 208,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "49",
+                    "name": "Nicaragua",
+                    "catalog": 74799,
+                    "percentage": 87.41,
+                    "Not_Live_Product_Count": 7458,
+                    "Not_Live_Status_Percentage": 8.72,
+                    "Dropped_Off_Product_Count": 3140,
+                    "Dropped_Off_Status_Percentage": 3.67,
+                    "Ready_Product_Count": 178,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "50",
+                    "name": "Norway",
+                    "catalog": 65898,
+                    "percentage": 84.28,
+                    "Not_Live_Product_Count": 8131,
+                    "Not_Live_Status_Percentage": 10.4,
+                    "Dropped_Off_Product_Count": 3933,
+                    "Dropped_Off_Status_Percentage": 5.03,
+                    "Ready_Product_Count": 229,
+                    "Ready_Status_Percentage": 0.29
+                },
+                {
+                    "key": "51",
+                    "name": "Panama",
+                    "catalog": 74791,
+                    "percentage": 87.4,
+                    "Not_Live_Product_Count": 7459,
+                    "Not_Live_Status_Percentage": 8.72,
+                    "Dropped_Off_Product_Count": 3141,
+                    "Dropped_Off_Status_Percentage": 3.67,
+                    "Ready_Product_Count": 178,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "52",
+                    "name": "Paraguay",
+                    "catalog": 74373,
+                    "percentage": 87.14,
+                    "Not_Live_Product_Count": 7560,
+                    "Not_Live_Status_Percentage": 8.86,
+                    "Dropped_Off_Product_Count": 3243,
+                    "Dropped_Off_Status_Percentage": 3.8,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "53",
+                    "name": "Peru",
+                    "catalog": 73850,
+                    "percentage": 87.32,
+                    "Not_Live_Product_Count": 7423,
+                    "Not_Live_Status_Percentage": 8.78,
+                    "Dropped_Off_Product_Count": 3123,
+                    "Dropped_Off_Status_Percentage": 3.69,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "54",
+                    "name": "Philippines",
+                    "catalog": 58727,
+                    "percentage": 86.92,
+                    "Not_Live_Product_Count": 6192,
+                    "Not_Live_Status_Percentage": 9.16,
+                    "Dropped_Off_Product_Count": 2441,
+                    "Dropped_Off_Status_Percentage": 3.61,
+                    "Ready_Product_Count": 204,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "56",
+                    "name": "Poland",
+                    "catalog": 58738,
+                    "percentage": 86.56,
+                    "Not_Live_Product_Count": 6140,
+                    "Not_Live_Status_Percentage": 9.05,
+                    "Dropped_Off_Product_Count": 2807,
+                    "Dropped_Off_Status_Percentage": 4.14,
+                    "Ready_Product_Count": 170,
+                    "Ready_Status_Percentage": 0.25
+                },
+                {
+                    "key": "57",
+                    "name": "Portugal",
+                    "catalog": 56783,
+                    "percentage": 82.27,
+                    "Not_Live_Product_Count": 7931,
+                    "Not_Live_Status_Percentage": 11.49,
+                    "Dropped_Off_Product_Count": 4141,
+                    "Dropped_Off_Status_Percentage": 6,
+                    "Ready_Product_Count": 169,
+                    "Ready_Status_Percentage": 0.24
+                },
+                {
+                    "key": "58",
+                    "name": "Romania",
+                    "catalog": 57986,
+                    "percentage": 86.79,
+                    "Not_Live_Product_Count": 5948,
+                    "Not_Live_Status_Percentage": 8.9,
+                    "Dropped_Off_Product_Count": 2673,
+                    "Dropped_Off_Status_Percentage": 4,
+                    "Ready_Product_Count": 206,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "59",
+                    "name": "Russia",
+                    "catalog": 45390,
+                    "percentage": 89.73,
+                    "Not_Live_Product_Count": 3805,
+                    "Not_Live_Status_Percentage": 7.52,
+                    "Dropped_Off_Product_Count": 1257,
+                    "Dropped_Off_Status_Percentage": 2.48,
+                    "Ready_Product_Count": 134,
+                    "Ready_Status_Percentage": 0.26
+                },
+                {
+                    "key": "60",
+                    "name": "Saudi Arabia",
+                    "catalog": 17283,
+                    "percentage": 87.77,
+                    "Not_Live_Product_Count": 1857,
+                    "Not_Live_Status_Percentage": 9.43,
+                    "Dropped_Off_Product_Count": 529,
+                    "Dropped_Off_Status_Percentage": 2.69,
+                    "Ready_Product_Count": 23,
+                    "Ready_Status_Percentage": 0.12
+                },
+                {
+                    "key": "61",
+                    "name": "Singapore",
+                    "catalog": 59411,
+                    "percentage": 86.8,
+                    "Not_Live_Product_Count": 6356,
+                    "Not_Live_Status_Percentage": 9.29,
+                    "Dropped_Off_Product_Count": 2476,
+                    "Dropped_Off_Status_Percentage": 3.62,
+                    "Ready_Product_Count": 204,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "62",
+                    "name": "Slovakia Rep.",
+                    "catalog": 56093,
+                    "percentage": 86.68,
+                    "Not_Live_Product_Count": 5564,
+                    "Not_Live_Status_Percentage": 8.6,
+                    "Dropped_Off_Product_Count": 2863,
+                    "Dropped_Off_Status_Percentage": 4.42,
+                    "Ready_Product_Count": 190,
+                    "Ready_Status_Percentage": 0.29
+                },
+                {
+                    "key": "63",
+                    "name": "Slovenia",
+                    "catalog": 59153,
+                    "percentage": 76.13,
+                    "Not_Live_Product_Count": 11121,
+                    "Not_Live_Status_Percentage": 14.31,
+                    "Dropped_Off_Product_Count": 7228,
+                    "Dropped_Off_Status_Percentage": 9.3,
+                    "Ready_Product_Count": 200,
+                    "Ready_Status_Percentage": 0.26
+                },
+                {
+                    "key": "64",
+                    "name": "South Africa",
+                    "catalog": 61782,
+                    "percentage": 91.26,
+                    "Not_Live_Product_Count": 4674,
+                    "Not_Live_Status_Percentage": 6.9,
+                    "Dropped_Off_Product_Count": 1092,
+                    "Dropped_Off_Status_Percentage": 1.61,
+                    "Ready_Product_Count": 151,
+                    "Ready_Status_Percentage": 0.22
+                },
+                {
+                    "key": "65",
+                    "name": "Spain",
+                    "catalog": 58486,
+                    "percentage": 81.14,
+                    "Not_Live_Product_Count": 8988,
+                    "Not_Live_Status_Percentage": 12.47,
+                    "Dropped_Off_Product_Count": 4457,
+                    "Dropped_Off_Status_Percentage": 6.18,
+                    "Ready_Product_Count": 148,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "66",
+                    "name": "Sri Lanka",
+                    "catalog": 60644,
+                    "percentage": 86.65,
+                    "Not_Live_Product_Count": 6809,
+                    "Not_Live_Status_Percentage": 9.73,
+                    "Dropped_Off_Product_Count": 2337,
+                    "Dropped_Off_Status_Percentage": 3.34,
+                    "Ready_Product_Count": 194,
+                    "Ready_Status_Percentage": 0.28
+                },
+                {
+                    "key": "67",
+                    "name": "Sweden",
+                    "catalog": 66449,
+                    "percentage": 83.56,
+                    "Not_Live_Product_Count": 8567,
+                    "Not_Live_Status_Percentage": 10.77,
+                    "Dropped_Off_Product_Count": 4250,
+                    "Dropped_Off_Status_Percentage": 5.34,
+                    "Ready_Product_Count": 253,
+                    "Ready_Status_Percentage": 0.32
+                },
+                {
+                    "key": "68",
+                    "name": "Switzerland",
+                    "catalog": 65272,
+                    "percentage": 80.07,
+                    "Not_Live_Product_Count": 10651,
+                    "Not_Live_Status_Percentage": 13.07,
+                    "Dropped_Off_Product_Count": 5306,
+                    "Dropped_Off_Status_Percentage": 6.51,
+                    "Ready_Product_Count": 291,
+                    "Ready_Status_Percentage": 0.36
+                },
+                {
+                    "key": "69",
+                    "name": "Taiwan",
+                    "catalog": 59383,
+                    "percentage": 86.94,
+                    "Not_Live_Product_Count": 6331,
+                    "Not_Live_Status_Percentage": 9.27,
+                    "Dropped_Off_Product_Count": 2371,
+                    "Dropped_Off_Status_Percentage": 3.47,
+                    "Ready_Product_Count": 215,
+                    "Ready_Status_Percentage": 0.31
+                },
+                {
+                    "key": "70",
+                    "name": "Thailand",
+                    "catalog": 58880,
+                    "percentage": 87.04,
+                    "Not_Live_Product_Count": 6192,
+                    "Not_Live_Status_Percentage": 9.15,
+                    "Dropped_Off_Product_Count": 2374,
+                    "Dropped_Off_Status_Percentage": 3.51,
+                    "Ready_Product_Count": 203,
+                    "Ready_Status_Percentage": 0.3
+                },
+                {
+                    "key": "71",
+                    "name": "Turkey",
+                    "catalog": 55965,
+                    "percentage": 91.38,
+                    "Not_Live_Product_Count": 3952,
+                    "Not_Live_Status_Percentage": 6.45,
+                    "Dropped_Off_Product_Count": 1088,
+                    "Dropped_Off_Status_Percentage": 1.78,
+                    "Ready_Product_Count": 237,
+                    "Ready_Status_Percentage": 0.39
+                },
+                {
+                    "key": "72",
+                    "name": "USA",
+                    "catalog": 46320,
+                    "percentage": 75.33,
+                    "Not_Live_Product_Count": 9606,
+                    "Not_Live_Status_Percentage": 15.62,
+                    "Dropped_Off_Product_Count": 5388,
+                    "Dropped_Off_Status_Percentage": 8.76,
+                    "Ready_Product_Count": 175,
+                    "Ready_Status_Percentage": 0.28
+                },
+                {
+                    "key": "73",
+                    "name": "Venezuela",
+                    "catalog": 73853,
+                    "percentage": 87.34,
+                    "Not_Live_Product_Count": 7420,
+                    "Not_Live_Status_Percentage": 8.78,
+                    "Dropped_Off_Product_Count": 3108,
+                    "Dropped_Off_Status_Percentage": 3.68,
+                    "Ready_Product_Count": 176,
+                    "Ready_Status_Percentage": 0.21
+                },
+                {
+                    "key": "74",
+                    "name": "Vietnam",
+                    "catalog": 59454,
+                    "percentage": 86.81,
+                    "Not_Live_Product_Count": 6378,
+                    "Not_Live_Status_Percentage": 9.31,
+                    "Dropped_Off_Product_Count": 2445,
+                    "Dropped_Off_Status_Percentage": 3.57,
+                    "Ready_Product_Count": 208,
+                    "Ready_Status_Percentage": 0.3
+                }
+            ]
