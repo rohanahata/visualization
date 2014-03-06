@@ -1,33 +1,50 @@
-def dump_json(tokens_in,state,size):
-    tokens_freq = FreqDist(tokens_in)
-    tokens_table = [dict(word=w, freq=tokens_freq[w]) for w in tokens_freq]
-    tokens_table_short = tokens_table[:size]
+from __future__ import division
+import nltk
+import json
+import re, pprint
+import random
+from nltk.book import FreqDist
+from nltk.corpus import PlaintextCorpusReader
+from nltk.corpus import wordnet as wn
+from nltk.corpus import stopwords
+import random
 
-    with open("tokens_"+ state + str(size) + ".json",'w') as outfile:
-        json.dump(tokens_table_short,outfile, sort_keys = True, indent = 4,
-ensure_ascii=False)
+raw = []
 
-raw_text = open('ofk.txt').read()
-tokens_raw = nltk.word_tokenize(raw_text)
+raw.append(open('ofk_chap_b.txt').read())
+raw.append(open('ofk_chap_c.txt').read())
+raw.append(open('ofk_chap_d.txt').read())
+raw.append(open('ofk_chap_e.txt').read())
 
-a=nltk.pos_tag(tokens_raw)
-b=dict(a)
-pos2=nltk.defaultdict(list)
-for k, v in b.items:
-	pos2[v].append(k)
-for k in pos2:
-	pos2[k]=list(set(pos2[k]))
-temp = {'Pronoun': ['PRP','PRP$','WP', 'POS'], 'Verb':['VBG','VBN','VBD','VBZ','VB'], 'Determiner':['DT','WDT'], 'Adjective':['JJ','JJR','JJS'], 'Noun':['NNP','NNPS','NNS','NN'], 'Particle':['RP'], 'Adverb':['WRB','RB','RBR','RBS'],'Conjuction':['CC'], 'Numeral':['CD'], 'Preposition':['IN','TO']}
-for k in temp:
-    z=0
-    for i in temp[k]:
-            z+=len(pos2[i])
-	print z, temp[k]
 
-temp = {'Pronoun': ['PRP','PRP$','WP', 'POS'], 'Verb':['VBG','VBN','VBD','VBZ','VB'], 'Determiner':['DT','WDT'], 'Adjective':['JJ','JJR','JJS'], 'Noun':['NNP','NNPS','NNS','NN'], 'Particle':['RP'], 'Adverb':['WRB','RB','RBR','RBS'],'Conjuction':['CC'], 'Numeral':['CD'], 'Preposition':['IN','TO']}
-for j in range(4):
-	for k in temp:
-		q=0
-		for i in temp[k]:
-			q+=len(position[j][i])
-		print q, k, j
+tokens_text = []
+tokens_imp = []
+toptokens = []
+z = []
+fin=[]
+for i in range(4):
+	tokens_text.append(nltk.word_tokenize(raw[i]))
+	tokens_text[i] = [w for w in tokens_text[i] if w.isalpha()]
+	tokens_imp.append([w for w in tokens_text[i] if not w in stopwords.words('english')])
+	tokens_imp[i]=FreqDist(tokens_imp[i])
+	toptokens.append([token for token in tokens_imp[i]])
+	toptokens[i]=toptokens[i][:20]
+
+for i in range(4):
+	z.append([])
+	fin.append([])
+	for j in range(20):
+		z[i].append(wn.synsets(toptokens[i][j]))
+		fin[i].append([])
+		for k in z[i][j]:
+			fin[i][j].append(dict(size=random.randint(1,10000),name=str(k)[str(k).index('\'')+1:str(k).index('.')]))
+abc=[]
+for i in range(4):
+	abc.append([dict(name=toptokens[i][j], children = fin[i][j]) for j in range (0,20)])
+
+chap_title = ['CHP 1', 'CHP 2', 'CHP 3', 'CHP 4']
+table_final = [dict(name=chap_title[i], children=abc[i]) for i in range(0,4)]
+tab = dict(name="flare",children = table_final)
+
+with open("final" + ".json",'w') as outfile:
+	json.dump(tab, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
